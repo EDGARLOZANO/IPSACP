@@ -25,6 +25,7 @@ Areas areas;
 Departamentos depart;
 Puestos puesto;
 String idsDepart="";
+String idsAreas="";
 String idsPuesto="";
 String[] d,d2;
     /**
@@ -61,14 +62,15 @@ String[] d,d2;
     private void areasDepart(String id){
           limpiar(comboArea);
         DefaultComboBoxModel modelocombo2 = (DefaultComboBoxModel) comboArea.getModel();
-        idsPuesto=areas.ReadArea(modelocombo2, id);
-        d=idsPuesto.split(",");
+        idsAreas=areas.ReadArea(modelocombo2, id);
+        d=idsAreas.split(",");
         puestoDepart(d[0]);
     }
     private void puestoDepart(String id){
           limpiar(comboPuesto);
         DefaultComboBoxModel modelocombo3 = (DefaultComboBoxModel) comboPuesto.getModel();
         puesto.ReadPuesto(modelocombo3, id);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,6 +89,9 @@ String[] d,d2;
         jLabel2 = new javax.swing.JLabel();
         comboPuesto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -102,8 +107,24 @@ String[] d,d2;
                 comboDepartMouseClicked(evt);
             }
         });
+        comboDepart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboDepartActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Departamento");
+
+        comboArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboAreaItemStateChanged(evt);
+            }
+        });
+        comboArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAreaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Area");
 
@@ -115,41 +136,65 @@ String[] d,d2;
 
         jLabel3.setText("Puesto");
 
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setText("jLabel5");
+
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(comboDepart, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(comboArea, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(comboPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel1)
-                .addGap(186, 186, 186)
+                .addGap(197, 197, 197)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(118, 118, 118))
+                .addGap(127, 127, 127))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addComponent(comboDepart, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(comboPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addGap(37, 37, 37)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboDepart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Empleado", jPanel1);
@@ -210,11 +255,25 @@ String[] d,d2;
     }//GEN-LAST:event_comboDepartItemStateChanged
 
     private void comboPuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPuestoItemStateChanged
-        int index=comboPuesto.getSelectedIndex();
-          d2=idsPuesto.split(",");
-          System.out.println(d[index]);
-          //puestoDepart(d2[index]);
+        
     }//GEN-LAST:event_comboPuestoItemStateChanged
+
+    private void comboAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboAreaItemStateChanged
+           int index=comboArea.getSelectedIndex();
+          d2=idsAreas.split(",");
+         System.out.println(index+"h");
+         if(index!=-1){
+             puestoDepart(d2[index]);
+         }     // TODO add your handling code here:
+    }//GEN-LAST:event_comboAreaItemStateChanged
+
+    private void comboAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAreaActionPerformed
+
+    private void comboDepartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDepartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboDepartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,9 +314,12 @@ String[] d,d2;
     private javax.swing.JComboBox<String> comboArea;
     private javax.swing.JComboBox<String> comboDepart;
     private javax.swing.JComboBox<String> comboPuesto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -237,7 +237,7 @@ public class add_depart extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnAddPuestoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPuestoMouseClicked
-        puestos.InsertPuesto(1, 1,JOptionPane.showInputDialog(null,"Nombre de Area").toString());
+        puestos.InsertPuesto(2, 1,JOptionPane.showInputDialog(null,"Nombre de Area").toString());
         TotalArea();// TODO add your handling code here:
                       // TODO add your handling code here:
     }//GEN-LAST:event_btnAddPuestoMouseClicked

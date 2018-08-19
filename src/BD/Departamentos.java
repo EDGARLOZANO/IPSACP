@@ -56,7 +56,7 @@ public class Departamentos {
                 modelo.addRow(datos);
             }
             cmd.close();
-            //  cn.close();
+         
 
         } catch (Exception ex) {}
     }
@@ -80,7 +80,7 @@ public class Departamentos {
               
             }
             cmd.close();
-            //  cn.close();
+           
            return id;
         } catch (Exception ex) { ;}
        return "s";

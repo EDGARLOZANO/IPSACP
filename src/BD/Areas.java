@@ -73,7 +73,7 @@ public String ReadArea(DefaultComboBoxModel modelo,String idDepart) {
                      }  
             }
             cmd.close();
-            System.out.println(id);
+            //System.out.println(id);
            return id;
 
         } catch (Exception ex) {}
