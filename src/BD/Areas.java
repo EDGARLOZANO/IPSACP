@@ -103,4 +103,29 @@ public String ReadArea(DefaultComboBoxModel modelo,String idDepart) {
         }
         return -1;
     } 
+  public int idNombre(String Nombre) {
+      int id=0;
+        try {
+            String sql = "SELECT id_area FROM areas "
+                    + "WHERE area='"+Nombre+"' ";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            
+            
+            while (rs.next()) {
+               
+                for (int i = 0; i <1; i++) {
+                    
+                   
+                    id=rs.getInt(i + 1);
+                     }
+              
+              
+            }
+            cmd.close();
+           
+           return id;
+        } catch (Exception ex) { }
+       return 0;
+    }
 }

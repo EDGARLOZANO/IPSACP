@@ -77,12 +77,32 @@ public class Departamentos {
                     id=id+rs.getString(i + 1)+",";
                      }
               
-              
             }
             cmd.close();
            
            return id;
         } catch (Exception ex) { ;}
        return "s";
+    }
+        
+ public int idNombre(String Nombre) {
+      int id=0;
+        try {
+            String sql = "SELECT id_departamento FROM departamentos "
+                    + "WHERE departamento='"+Nombre+"' ";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            
+            
+            while (rs.next()) {
+                 for (int i = 0; i <1; i++) {
+                           id=rs.getInt(i + 1);
+                     }  
+            }
+            cmd.close();
+           
+           return id;
+        } catch (Exception ex) { ;}
+       return 0;
     }
 }

@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -34,20 +35,22 @@ public class Empleados {
     Conexion con = new Conexion();
         cn = con.Connect();
     }
-public void InsertEmpleado(File foto) {
+public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int depart,int area,int puesto,
+        String contrato,String status) {
         try {
 
            FileInputStream is = new FileInputStream(foto);
             PreparedStatement cmd = cn.prepareStatement("insert into empleado values(?,?,?,?,?,?,?,?,?,?)");
-            cmd.setInt(1,1);
-            cmd.setString(2,"edgar");
-            cmd.setString(3,"edgar");
-            cmd.setString(4,"edgar");
-            cmd.setInt(5,1);
-            cmd.setInt(6,1);
-            cmd.setInt(7,1);
-            cmd.setString(8,"s");
-            cmd.setString(9,"A");
+            
+            cmd.setInt(1,ultimoidEmpleado()+1);
+            cmd.setString(2,Nombre);
+            cmd.setString(3,apeP);
+            cmd.setString(4,apeM);
+            cmd.setInt(5,depart);
+            cmd.setInt(6,area);
+            cmd.setInt(7,puesto);
+            cmd.setString(8,contrato);
+            cmd.setString(9,status);
             cmd.setBlob(10,is);
             
             cmd.execute();
@@ -66,9 +69,7 @@ public void InsertEmpleado(File foto) {
              while (rs.next()) {
                 
                 for (int i = 0; i <1; i++) {
-                    
-                    //modelo.addElement(rs.getString(i + 2));
-                    //id=id+rs.getString(i + 1)+",";
+       
                     java.sql.Blob blob = rs.getBlob (i+2);
                      byte[] imageByte = blob.getBytes(1, (int) blob.length());
   	                     InputStream is=new ByteArrayInputStream(imageByte);
@@ -86,4 +87,38 @@ public void InsertEmpleado(File foto) {
 
         } catch (Exception ex) {System.out.println(ex);}
     }
+   public void ReadEmpleado(DefaultTableModel modelo) {
+
+        try {
+            String sql = "SELECT * FROM emplado";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+           // System.out.println(sql);
+            while (rs.next()) {
+                Object[] datos = new Object[9];
+                for (int i = 0; i < 9; i++) {
+                    datos[i] = rs.getString(i + 1);
+                     }
+                modelo.addRow(datos);
+            }
+            cmd.close();
+         } catch (Exception ex) {}
+    }
+   public int ultimoidEmpleado() {
+    int id=0;
+        try {
+            String sql = "SELECT MAX(id_empleado) FROM empleado";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            while (rs.next()) {
+              
+                for (int i = 0; i < 1; i++) {
+                    id= rs.getInt(i + 1);
+                     }
+            }
+            cmd.close();
+            return id;
+         } catch (Exception ex) {}
+     return id=0; 
+   }
 }

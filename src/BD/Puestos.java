@@ -83,6 +83,31 @@ public class Puestos {
 
         } catch (Exception ex) {System.out.println(ex);}
     }
-        
+  public int idNombre(String Nombre) {
+      int id=0;
+        try {
+            String sql = "SELECT id_puesto FROM puestos "
+                    + "WHERE puesto='"+Nombre+"' ";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            
+            
+            while (rs.next()) {
+               
+                for (int i = 0; i <1; i++) {
+                    //datos[i] = rs.getString(i + 1);
+                    //modelo.addItem(rs.getString(i + 1));
+                   
+                    id=rs.getInt(i + 1);
+                     }
+              
+              
+            }
+            cmd.close();
+           
+           return id;
+        } catch (Exception ex) { ;}
+       return 0;
+    }       
        
 }
