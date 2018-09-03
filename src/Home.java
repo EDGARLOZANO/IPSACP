@@ -1,6 +1,11 @@
 
 import BD.Areas;
 import BD.Departamentos;
+import BD.Empleados;
+import java.awt.Font;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,22 +21,73 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Home extends javax.swing.JFrame {
    
-    DefaultTableModel modelo;
+    DefaultTableModel modelo,modeloEmpleado;
       Departamentos depart;
+      Empleados empleados;
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
         depart= new Departamentos();
-       modelo = (DefaultTableModel) tablaDepart.getModel();
+        empleados=new Empleados();
+        
+          modelo = (DefaultTableModel) tablaDepart.getModel();
+          modeloEmpleado = (DefaultTableModel) tablaEmpleado.getModel();
+          tablaEmpleado.setDefaultRenderer(Object.class,new ImgTabla());
+         ImgUS();
+          RadioGroup();
         TotalDepart();
+        TotalEmpleados();
+        TablaDimensiones();
+    }
+    private void RadioGroup(){
+       radioGroup1.add(radioNom);
+        radioGroup1.add(radioID);
+        radioGroup1.add(radioDepart);
+        radioNom.setSelected(true);
+        radioGroup2.add(radioInactivos);
+        radioGroup2.add(radioActivos);
+        radioGroup2.add(radioTodos);
+        radioActivos.setSelected(true);
+    }
+    private void ImgUS(){
+       File fileImg=new File("./src/img/usuario.png");
+       Image foto= getToolkit().getImage(fileImg.toString());
+          foto= foto.getScaledInstance(50,50,Image.SCALE_DEFAULT);
+          labelUS.setIcon(new ImageIcon(foto));
+    }
+    private void TablaDimensiones(){
+    
+      tablaEmpleado.setRowHeight(60);
+      tablaEmpleado.getTableHeader().setFont(new Font("Ubuntu", 1,15));
+      tablaEmpleado.getColumnModel().getColumn(6).setPreferredWidth(2);
+      tablaEmpleado.getColumnModel().getColumn(0).setPreferredWidth(40);
+      tablaEmpleado.getColumnModel().getColumn(1).setPreferredWidth(10);
+      tablaEmpleado.getColumnModel().getColumn(2).setPreferredWidth(250);
+       tablaEmpleado.getColumnModel().getColumn(4).setPreferredWidth(50);
+      /*tablaProductos.getColumnModel().getColumn(1).setPreferredWidth(230);
+      tablaProductos.getColumnModel().getColumn(2).setPreferredWidth(122);
+      tablaProductos.getColumnModel().getColumn(3).setPreferredWidth(65);
+      tablaProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
+      tablaProductos.getColumnModel().getColumn(5).setPreferredWidth(20);
+      tablaProductos.getColumnModel().getColumn(6).setPreferredWidth(5);
+      tablaProductos.getColumnModel().getColumn(7).setPreferredWidth(30);
+      tablaProductos.getColumnModel().getColumn(8).setPreferredWidth(1);
+      tablaProductos.getColumnModel().getColumn(9).setPreferredWidth(2);
+      tablaProductos.getTableHeader().setFont(new Font("Ubuntu", 1,15));*/
     }
     private void TotalDepart() {
         limpiar(tablaDepart);
         DefaultTableModel modelo = (DefaultTableModel) tablaDepart.getModel();
         depart.ReadDepart(modelo);
          
+    }
+    private void TotalEmpleados(){
+        limpiar(tablaEmpleado);
+      // modeloEmpleado = (DefaultTableModel) tablaEmpleado.getModel();
+        empleados.ReadEmpleado(modeloEmpleado);
+    
     }
       private void limpiar(JTable tabla) {
         while (tabla.getRowCount() > 0) {
@@ -48,74 +104,155 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        radioGroup1 = new javax.swing.ButtonGroup();
+        radioGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        panelGeneral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_empleado = new javax.swing.JTable();
+        tablaEmpleado = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        radioID = new javax.swing.JRadioButton();
+        radioNom = new javax.swing.JRadioButton();
+        radioDepart = new javax.swing.JRadioButton();
+        jPanel4 = new javax.swing.JPanel();
+        radioActivos = new javax.swing.JRadioButton();
+        radioInactivos = new javax.swing.JRadioButton();
+        radioTodos = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDepart = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelUS = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabla_empleado.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEmpleado.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        tablaEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No. Empleado", "Nombre ", "Departamento", "Area", "Puesto", "Activo"
+                "No. Empleado", "Foto", "Nombre ", "Departamento", "Area", "Puesto", "Activo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabla_empleado);
-        if (tabla_empleado.getColumnModel().getColumnCount() > 0) {
-            tabla_empleado.getColumnModel().getColumn(0).setResizable(false);
-            tabla_empleado.getColumnModel().getColumn(1).setResizable(false);
-            tabla_empleado.getColumnModel().getColumn(2).setResizable(false);
-            tabla_empleado.getColumnModel().getColumn(3).setResizable(false);
-            tabla_empleado.getColumnModel().getColumn(4).setResizable(false);
-            tabla_empleado.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(tablaEmpleado);
+        if (tablaEmpleado.getColumnModel().getColumnCount() > 0) {
+            tablaEmpleado.getColumnModel().getColumn(0).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(1).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(2).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(3).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(4).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(5).setResizable(false);
+            tablaEmpleado.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jButton1.setText("Nuevo");
+
+        radioID.setText("No. Empleado");
+
+        radioNom.setText("Nombre");
+
+        radioDepart.setText("Departamento");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 914, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radioDepart)
+                    .addComponent(radioNom)
+                    .addComponent(radioID))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(14, 14, 14)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(radioID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioNom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioDepart)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Empleados", jPanel1);
+        radioActivos.setText("Activos");
+
+        radioInactivos.setText("Inactivos");
+
+        radioTodos.setText("Todos");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radioActivos)
+                    .addComponent(radioInactivos)
+                    .addComponent(radioTodos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(radioActivos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioInactivos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioTodos)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
+        panelGeneral.setLayout(panelGeneralLayout);
+        panelGeneralLayout.setHorizontalGroup(
+            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(panelGeneralLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addComponent(jButton1))
+        );
+        panelGeneralLayout.setVerticalGroup(
+            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGeneralLayout.createSequentialGroup()
+                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(23, 23, 23)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Empleados", panelGeneral);
 
         tablaDepart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,7 +277,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,14 +286,12 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Departamentos", jPanel2);
 
         jPanel3.setBackground(java.awt.Color.gray);
-
-        jLabel1.setText("sesion");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -164,32 +299,30 @@ public class Home extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(labelUS, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+            .addComponent(labelUS, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -264,15 +397,25 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelUS;
+    private javax.swing.JPanel panelGeneral;
+    private javax.swing.JRadioButton radioActivos;
+    private javax.swing.JRadioButton radioDepart;
+    private javax.swing.ButtonGroup radioGroup1;
+    private javax.swing.ButtonGroup radioGroup2;
+    private javax.swing.JRadioButton radioID;
+    private javax.swing.JRadioButton radioInactivos;
+    private javax.swing.JRadioButton radioNom;
+    private javax.swing.JRadioButton radioTodos;
     private javax.swing.JTable tablaDepart;
-    private javax.swing.JTable tabla_empleado;
+    private javax.swing.JTable tablaEmpleado;
     // End of variables declaration//GEN-END:variables
 }

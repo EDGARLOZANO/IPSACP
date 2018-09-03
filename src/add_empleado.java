@@ -15,6 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -998,6 +999,7 @@ File[] files=null;
         doc.InsertDoc(labelID.getText(),estadoDoc(checkActa),estadoDoc(checkAntP),
                 estadoDoc(checkDomi),estadoDoc(checkEstudios),estadoDoc(checkContrato),
                 estadoDoc(checkCURP),estadoDoc(checkCV),estadoDoc(checkINE));
+      JOptionPane.showMessageDialog(null, "Documentos guardados con exito!");
     }//GEN-LAST:event_btnGuardarImgMouseClicked
 
     /**
