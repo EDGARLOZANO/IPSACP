@@ -5,6 +5,8 @@
  */
 package BD;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
@@ -21,24 +23,32 @@ public class DocImg {
         cn = con.Connect();
     }
     
-    public void InsertDatos(String id_Empleado,String domi,String lugarNac,
-                String fechaNac,int edad,String correo,String nss,String rfc,
-                String curp,String tel,String estadoCv) {
+    public void InsertImg(String idEmpleado,File imgActa,File imgAnte,
+            File imgDomi,File imgEstudios, File imgContrato, File imgCurp,
+            File pdfCV, File imgIfe) {
         try {
-
-           PreparedStatement cmd = cn.prepareStatement("insert into data_person values(?,?,?,?,?,?,?,?,?,?,?)");
+            FileInputStream img1= new FileInputStream(imgActa);
+            FileInputStream img2 = new FileInputStream(imgAnte);
+            FileInputStream img3= new FileInputStream(imgDomi);
+            FileInputStream img4 = new FileInputStream(imgEstudios);
+            FileInputStream img5= new FileInputStream(imgContrato);
+            FileInputStream img6 = new FileInputStream(imgCurp);
+            FileInputStream img7= new FileInputStream(pdfCV);
+            FileInputStream img8 = new FileInputStream(imgIfe);
+          
+           
+           PreparedStatement cmd = cn.prepareStatement("insert into doc_img values(?,?,?,?,?,?,?,?,?)");
             
-            cmd.setString(1,id_Empleado);
-            cmd.setString(2,domi);
-            cmd.setString(3,lugarNac);
-            cmd.setString(4,fechaNac);
-            cmd.setInt(5,edad);
-            cmd.setString(6,correo);
-            cmd.setString(7,nss);
-            cmd.setString(8,rfc);
-            cmd.setString(9,curp);
-            cmd.setString(10,tel);
-            cmd.setString(11,estadoCv);
+            cmd.setString(1,idEmpleado);
+            cmd.setBlob(2,img1);
+            cmd.setBlob(3,img2);
+            cmd.setBlob(4,img3);
+            cmd.setBlob(5,img4);
+            cmd.setBlob(6,img5);
+            cmd.setBlob(7,img6);
+            cmd.setBlob(8,img7);
+            cmd.setBlob(9,img8);
+           
             
             cmd.execute();
             cmd.close();

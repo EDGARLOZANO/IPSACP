@@ -615,12 +615,12 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="btnCIne" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="checkINE" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Component id="btnActa" min="-2" pref="33" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkActa" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -637,7 +637,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnEstudios" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCheckBox5" min="-2" max="-2" attributes="0"/>
+                              <Component id="checkEstudios" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -649,12 +649,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnCurp" min="-2" pref="33" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkCURP" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnContrato" min="-2" pref="33" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkContrato" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -662,8 +662,8 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="461" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="btnGuardarImg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
@@ -672,18 +672,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCV" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCheckBox8" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkCV" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="btnApenales" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCheckBox7" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkAntP" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelDomicilio" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnDomicilio" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCheckBox9" min="-2" max="-2" attributes="0"/>
+                              <Component id="checkDomi" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -705,15 +705,17 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jCheckBox3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox5" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="checkActa" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="checkEstudios" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="btnActa" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnEstudios" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCheckBox4" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="checkCURP" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="btnCIne" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="checkINE" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -721,11 +723,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBox2" min="-2" pref="34" max="-2" attributes="0"/>
-                                  <Component id="btnCIne" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnCurp" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnCurp" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="33" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -738,17 +736,17 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnCV" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox8" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="checkCV" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="btnApenales" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox7" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="jCheckBox9" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="checkAntP" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="checkDomi" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="btnContrato" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox6" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="checkContrato" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="btnDomicilio" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardarImg" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -777,12 +775,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelActaMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+            <Component class="javax.swing.JCheckBox" name="checkINE">
               <Properties>
                 <Property name="text" type="java.lang.String" value="INE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+            <Component class="javax.swing.JCheckBox" name="checkActa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Acta de Nacimiento"/>
               </Properties>
@@ -794,7 +792,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+            <Component class="javax.swing.JCheckBox" name="checkCURP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CURP"/>
               </Properties>
@@ -806,7 +804,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+            <Component class="javax.swing.JCheckBox" name="checkEstudios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C. Estudios"/>
               </Properties>
@@ -818,12 +816,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox6">
+            <Component class="javax.swing.JCheckBox" name="checkContrato">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contrato"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkContratoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelContrato">
@@ -893,7 +891,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCIneMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+            <Component class="javax.swing.JCheckBox" name="checkAntP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ante. Penales"/>
               </Properties>
@@ -915,7 +913,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnApenalesMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox8">
+            <Component class="javax.swing.JCheckBox" name="checkCV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CV"/>
               </Properties>
@@ -937,15 +935,18 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDomicilioMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox9">
+            <Component class="javax.swing.JCheckBox" name="checkDomi">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C. Domicilio"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnGuardarImg">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton2"/>
+                <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGuardarImgMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>

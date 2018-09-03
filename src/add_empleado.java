@@ -2,6 +2,8 @@
 import BD.Areas;
 import BD.DataPerson;
 import BD.Departamentos;
+import BD.DocImg;
+import BD.Documentos;
 import BD.Empleados;
 import BD.Puestos;
 import java.awt.Image;
@@ -9,6 +11,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -16,11 +19,6 @@ import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -35,11 +33,14 @@ Departamentos depart;
 Puestos puesto;
 Empleados empleado;
 DataPerson datosP;
+DocImg docimg;
+Documentos doc;
 String idsDepart="";
 String idsAreas="";
 String idsPuesto="";
 String[] d,d2;
 File fileImg=null;
+File[] files=null;
     /**
      * Creates new form add_empleado
      */
@@ -53,7 +54,10 @@ File fileImg=null;
         puesto=new Puestos();
         empleado=new Empleados();
         datosP=new DataPerson();
-        fileImg=new File("./src/img/usuario.png");
+        docimg=new DocImg();
+        doc=new Documentos();
+        FileALL();        
+        
          //panelGeneral.setEnabledAt(1,false); 
         //panelGeneral.setEnabledAt(2,false); 
            btnActualizarEmpleado.setVisible(false);
@@ -65,7 +69,19 @@ File fileImg=null;
             ((DefaultComboBoxModel) combo.getModel()).removeAllElements();
         }
     }
-
+    private void FileALL(){
+       fileImg=new File("./src/img/usuario.png");
+        files=new File[9];
+        files[0]=new File("./src/img/acta.png");
+        files[1]=new File("./src/img/acta.png");
+        files[2]=new File("./src/img/acta.png");
+        files[3]=new File("./src/img/acta.png");
+        files[4]=new File("./src/img/acta.png");
+        files[5]=new File("./src/img/acta.png");
+        files[6]=new File("./src/img/acta.png");
+        files[7]=new File("./src/img/acta.png");
+        files[8]=new File("./src/img/acta.png");
+    }
     private void TotalDepart() {
         
         limpiar(comboDepart);
@@ -91,6 +107,87 @@ File fileImg=null;
         puesto.ReadPuesto(modelocombo3, id);
         
     }
+     public File cargarimg(JLabel label){
+  JFileChooser archivo= new JFileChooser();
+        FileNameExtensionFilter filtro = 
+         new FileNameExtensionFilter("Formatos de Archivo JPEG(*.JPG;*.JPEG)","jpg","jpeg","png");
+        archivo.addChoosableFileFilter(filtro);
+        archivo.setFileFilter(filtro);
+        int ventana=archivo.showOpenDialog(null);
+        File file=null;
+     if(ventana==JFileChooser.APPROVE_OPTION){
+        
+          file=archivo.getSelectedFile();
+        
+          Image foto= getToolkit().getImage(file.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+        }else{
+         file=new File("./src/img/x.png");
+          Image foto= getToolkit().getImage(file.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+          
+     }
+     return file=new File("./src/img/x.png");
+  }
+     public File cargarimg(JLabel label,JCheckBox check){
+  JFileChooser archivo= new JFileChooser();
+        FileNameExtensionFilter filtro = 
+         new FileNameExtensionFilter("Formatos de Archivo JPEG(*.JPG;*.JPEG)","jpg","jpeg","png");
+        archivo.addChoosableFileFilter(filtro);
+        archivo.setFileFilter(filtro);
+        int ventana=archivo.showOpenDialog(null);
+        File file=null;
+     if(ventana==JFileChooser.APPROVE_OPTION){
+        
+          file=archivo.getSelectedFile();
+        
+          Image foto= getToolkit().getImage(file.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+          check.setSelected(true);
+        }else{
+         file=new File("./src/img/x.png");
+          Image foto= getToolkit().getImage(file.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+          check.setSelected(false);
+     }
+     return file=new File("./src/img/x.png");
+  }
+     public File cargarDoc(JCheckBox check,JLabel label){
+  JFileChooser archivo= new JFileChooser();
+        FileNameExtensionFilter filtro = 
+         new FileNameExtensionFilter("Formatos de Archivo Documentos","docx","pdf","jpg","jpeg","png");
+        archivo.addChoosableFileFilter(filtro);
+        archivo.setFileFilter(filtro);
+        int ventana=archivo.showOpenDialog(null);
+        File file=null;
+     if(ventana==JFileChooser.APPROVE_OPTION){
+        
+          file=archivo.getSelectedFile();
+          File file2=new File("./src/img/pdf.png");
+          Image foto= getToolkit().getImage(file2.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+          check.setSelected(true);
+          
+        }else{
+         file=new File("./src/img/x.png");
+          Image foto= getToolkit().getImage(file.toString());
+          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
+          label.setIcon(new ImageIcon(foto));
+          check.setSelected(false);
+     }
+     return file=new File("./src/img/x.png");
+  }
+   
+     private String estadoDoc(JCheckBox check1){
+         String estado=(check1.isSelected()==true)?"Entregado":"Faltante";
+     return estado;
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,14 +244,14 @@ File fileImg=null;
         panelDocumentos = new javax.swing.JPanel();
         labelIne = new javax.swing.JLabel();
         labelActa = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        checkINE = new javax.swing.JCheckBox();
+        checkActa = new javax.swing.JCheckBox();
         labelCestudios = new javax.swing.JLabel();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        checkCURP = new javax.swing.JCheckBox();
         labelCurp = new javax.swing.JLabel();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        checkEstudios = new javax.swing.JCheckBox();
         labelApenales = new javax.swing.JLabel();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        checkContrato = new javax.swing.JCheckBox();
         labelContrato = new javax.swing.JLabel();
         btnCV = new javax.swing.JButton();
         btnActa = new javax.swing.JButton();
@@ -162,14 +259,14 @@ File fileImg=null;
         btnEstudios = new javax.swing.JButton();
         btnCurp = new javax.swing.JButton();
         btnCIne = new javax.swing.JButton();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        checkAntP = new javax.swing.JCheckBox();
         labelCV = new javax.swing.JLabel();
         btnApenales = new javax.swing.JButton();
-        jCheckBox8 = new javax.swing.JCheckBox();
+        checkCV = new javax.swing.JCheckBox();
         labelDomicilio = new javax.swing.JLabel();
         btnDomicilio = new javax.swing.JButton();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        checkDomi = new javax.swing.JCheckBox();
+        btnGuardarImg = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         labelID = new javax.swing.JLabel();
@@ -519,24 +616,24 @@ File fileImg=null;
             }
         });
 
-        jCheckBox2.setText("INE");
+        checkINE.setText("INE");
 
-        jCheckBox3.setText("Acta de Nacimiento");
+        checkActa.setText("Acta de Nacimiento");
 
         labelCestudios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acta.png"))); // NOI18N
 
-        jCheckBox4.setText("CURP");
+        checkCURP.setText("CURP");
 
         labelCurp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acta.png"))); // NOI18N
 
-        jCheckBox5.setText("C. Estudios");
+        checkEstudios.setText("C. Estudios");
 
         labelApenales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acta.png"))); // NOI18N
 
-        jCheckBox6.setText("Contrato");
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+        checkContrato.setText("Contrato");
+        checkContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
+                checkContratoActionPerformed(evt);
             }
         });
 
@@ -584,7 +681,7 @@ File fileImg=null;
             }
         });
 
-        jCheckBox7.setText("Ante. Penales");
+        checkAntP.setText("Ante. Penales");
 
         labelCV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acta.png"))); // NOI18N
 
@@ -595,7 +692,7 @@ File fileImg=null;
             }
         });
 
-        jCheckBox8.setText("CV");
+        checkCV.setText("CV");
 
         labelDomicilio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acta.png"))); // NOI18N
 
@@ -606,9 +703,14 @@ File fileImg=null;
             }
         });
 
-        jCheckBox9.setText("C. Domicilio");
+        checkDomi.setText("C. Domicilio");
 
-        jButton2.setText("jButton2");
+        btnGuardarImg.setText("Guardar");
+        btnGuardarImg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarImgMouseClicked(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
 
@@ -628,12 +730,12 @@ File fileImg=null;
                                 .addGap(54, 54, 54))
                             .addGroup(panelDocumentosLayout.createSequentialGroup()
                                 .addComponent(btnCIne, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox2)
-                                .addGap(46, 46, 46)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkINE)
+                                .addGap(40, 40, 40)
                                 .addComponent(btnActa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3)
+                                .addComponent(checkActa)
                                 .addGap(37, 37, 37))))
                     .addGroup(panelDocumentosLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -645,7 +747,7 @@ File fileImg=null;
                     .addGroup(panelDocumentosLayout.createSequentialGroup()
                         .addComponent(btnEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox5)
+                        .addComponent(checkEstudios)
                         .addGap(284, 284, 284))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDocumentosLayout.createSequentialGroup()
                         .addComponent(labelCestudios)
@@ -656,15 +758,15 @@ File fileImg=null;
                             .addGroup(panelDocumentosLayout.createSequentialGroup()
                                 .addComponent(btnCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox4))
+                                .addComponent(checkCURP))
                             .addGroup(panelDocumentosLayout.createSequentialGroup()
                                 .addComponent(btnContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox6)))
+                                .addComponent(checkContrato)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(panelDocumentosLayout.createSequentialGroup()
-                .addGap(461, 461, 461)
-                .addComponent(jButton2)
+                .addGap(248, 248, 248)
+                .addComponent(btnGuardarImg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(164, 164, 164))
@@ -672,18 +774,18 @@ File fileImg=null;
                 .addContainerGap()
                 .addComponent(btnCV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox8)
+                .addComponent(checkCV)
                 .addGap(80, 80, 80)
                 .addComponent(btnApenales, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox7)
+                .addComponent(checkAntP)
                 .addGap(52, 52, 52)
                 .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDomicilio)
                     .addGroup(panelDocumentosLayout.createSequentialGroup()
                         .addComponent(btnDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox9)))
+                        .addComponent(checkDomi)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDocumentosLayout.setVerticalGroup(
@@ -700,21 +802,20 @@ File fileImg=null;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(checkActa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(checkEstudios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelDocumentosLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnActa)
                                     .addComponent(btnEstudios)
-                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(checkCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCIne)
+                                    .addComponent(checkINE, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelDocumentosLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCIne)
-                            .addComponent(btnCurp))
+                        .addComponent(btnCurp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)))
                 .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelApenales, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -724,16 +825,16 @@ File fileImg=null;
                 .addGap(18, 18, 18)
                 .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCV, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkCV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnApenales, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkAntP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkDomi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnContrato, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkContrato, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDomicilio, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(52, 52, 52)
                 .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnGuardarImg)
                     .addComponent(jButton3))
                 .addGap(27, 27, 27))
         );
@@ -791,10 +892,9 @@ File fileImg=null;
     private void comboAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboAreaItemStateChanged
            int index=comboArea.getSelectedIndex();
           d2=idsAreas.split(",");
-         System.out.println(index+"h");
          if(index!=-1){
              puestoDepart(d2[index]);
-         }     // TODO add your handling code here:
+         }    
     }//GEN-LAST:event_comboAreaItemStateChanged
 
     private void comboAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAreaActionPerformed
@@ -804,71 +904,59 @@ File fileImg=null;
     private void comboDepartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDepartActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboDepartActionPerformed
-  public File cargarimg(JLabel label){
-  JFileChooser archivo= new JFileChooser();
-        FileNameExtensionFilter filtro = 
-         new FileNameExtensionFilter("Formatos de Archivo JPEG(*.JPG;*.JPEG)","jpg","jpeg","png");
-        archivo.addChoosableFileFilter(filtro);
-        archivo.setFileFilter(filtro);
-        int ventana=archivo.showOpenDialog(null);
-        File file=null;
-     if(ventana==JFileChooser.APPROVE_OPTION){
-        
-          file=archivo.getSelectedFile();
-          //empleado.InsertEmpleado(file);
-          Image foto= getToolkit().getImage(file.toString());
-          foto= foto.getScaledInstance(130,130,Image.SCALE_DEFAULT);
-          label.setIcon(new ImageIcon(foto));
-        }
-     return file;
-  }
+ 
     private void labelIneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelIneMouseClicked
-        cargarimg(labelIne);        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_labelIneMouseClicked
 
     private void labelActaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelActaMouseClicked
-     cargarimg(labelActa);        // TODO add your handling code here:
+     // files[0]=cargarimg(labelActa);        // TODO add your handling code here:
     }//GEN-LAST:event_labelActaMouseClicked
 
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+    private void checkContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkContratoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox6ActionPerformed
+    }//GEN-LAST:event_checkContratoActionPerformed
 
     private void btnCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCVMouseClicked
-      cargarimg(labelCV);          // TODO add your handling code here:
+      
+        files[6]=cargarDoc(checkCV,labelCV); 
+       
+        
+
+      // TODO add your handling code here:
     }//GEN-LAST:event_btnCVMouseClicked
 
     private void btnActaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActaMouseClicked
-       cargarimg(labelActa);  
+       files[0]=cargarimg(labelActa,checkActa);  
     }//GEN-LAST:event_btnActaMouseClicked
 
     private void btnContratoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContratoMouseClicked
-       cargarimg(labelContrato);  
+       files[4]=cargarDoc(checkContrato,labelContrato);  
     }//GEN-LAST:event_btnContratoMouseClicked
 
     private void btnEstudiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstudiosMouseClicked
-       cargarimg(labelCestudios);  
+       files[3]=cargarimg(labelCestudios,checkEstudios);  
     }//GEN-LAST:event_btnEstudiosMouseClicked
 
     private void btnCurpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCurpMouseClicked
-           cargarimg(labelCurp);  
+           files[5]=cargarimg(labelCurp,checkCURP);  
     }//GEN-LAST:event_btnCurpMouseClicked
 
     private void btnCIneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCIneMouseClicked
-      cargarimg(labelIne);  
+      files[7]=cargarimg(labelIne,checkINE);
     }//GEN-LAST:event_btnCIneMouseClicked
 
     private void btnApenalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApenalesMouseClicked
-        cargarimg(labelApenales);  
+        files[1]=cargarimg(labelApenales,checkAntP);  
     }//GEN-LAST:event_btnApenalesMouseClicked
 
     private void btnDomicilioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDomicilioMouseClicked
-       cargarimg(labelDomicilio);  
+       files[2]=cargarimg(labelDomicilio,checkDomi);  
     }//GEN-LAST:event_btnDomicilioMouseClicked
 
     private void labelImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImgMouseClicked
         fileImg=cargarimg(labelImg); 
-       System.out.println(fileImg);        // TODO add your handling code here:
+              // TODO add your handling code here:
     }//GEN-LAST:event_labelImgMouseClicked
 
     private void btnCrearEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearEmpleadoMouseClicked
@@ -903,6 +991,14 @@ File fileImg=null;
                txtNSS.getText(),txtRFC.getText(),txtCURP.getText(),txtTel.getText(),
                comboEstado.getSelectedItem().toString());
     }//GEN-LAST:event_btnDataPersonMouseClicked
+
+    private void btnGuardarImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarImgMouseClicked
+        docimg.InsertImg(labelID.getText(),files[0],files[1] ,files[2],files[3],
+                files[4],files[5],files[6],files[7]);
+        doc.InsertDoc(labelID.getText(),estadoDoc(checkActa),estadoDoc(checkAntP),
+                estadoDoc(checkDomi),estadoDoc(checkEstudios),estadoDoc(checkContrato),
+                estadoDoc(checkCURP),estadoDoc(checkCV),estadoDoc(checkINE));
+    }//GEN-LAST:event_btnGuardarImgMouseClicked
 
     /**
      * @param args the command line arguments
@@ -952,6 +1048,15 @@ File fileImg=null;
     private javax.swing.JButton btnDomicilio;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEstudios;
+    private javax.swing.JButton btnGuardarImg;
+    private javax.swing.JCheckBox checkActa;
+    private javax.swing.JCheckBox checkAntP;
+    private javax.swing.JCheckBox checkCURP;
+    private javax.swing.JCheckBox checkCV;
+    private javax.swing.JCheckBox checkContrato;
+    private javax.swing.JCheckBox checkDomi;
+    private javax.swing.JCheckBox checkEstudios;
+    private javax.swing.JCheckBox checkINE;
     private javax.swing.JCheckBox checkStatus;
     private javax.swing.JComboBox<String> comboArea;
     private javax.swing.JComboBox<String> comboContrato;
@@ -960,16 +1065,7 @@ File fileImg=null;
     private javax.swing.JComboBox<String> comboPuesto;
     private com.toedter.calendar.JDateChooser dateFecha;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
