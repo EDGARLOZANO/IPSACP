@@ -59,8 +59,8 @@ File[] files=null;
         doc=new Documentos();
         FileALL();        
         
-         //panelGeneral.setEnabledAt(1,false); 
-        //panelGeneral.setEnabledAt(2,false); 
+         panelGeneral.setEnabledAt(1,false); 
+        panelGeneral.setEnabledAt(2,false); 
            btnActualizarEmpleado.setVisible(false);
         btnEliminarEmpleado.setVisible(false);
         TotalDepart();
@@ -327,6 +327,12 @@ File[] files=null;
         jLabel7.setText("Apellido Paterno");
 
         jLabel8.setText("Apellido Materno");
+
+        txtApeP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApePKeyReleased(evt);
+            }
+        });
 
         comboContrato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temporal", "Confianza" }));
 
@@ -846,7 +852,7 @@ File[] files=null;
         jLabel17.setText("ID-");
 
         labelID.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        labelID.setText("1");
+        labelID.setText("---");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1001,6 +1007,10 @@ File[] files=null;
                 estadoDoc(checkCURP),estadoDoc(checkCV),estadoDoc(checkINE));
       JOptionPane.showMessageDialog(null, "Documentos guardados con exito!");
     }//GEN-LAST:event_btnGuardarImgMouseClicked
+
+    private void txtApePKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApePKeyReleased
+           txtApeP.setText(txtApeP.getText().toUpperCase());        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApePKeyReleased
 
     /**
      * @param args the command line arguments

@@ -121,6 +121,63 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
             cmd.close();
          } catch (Exception ex) {JOptionPane.showMessageDialog(null, "Error al leer: " + ex);}
     }
+   
+   public void busqueda(DefaultTableModel modelo, String palabra,String parametro,int tipo) {
+
+        try {
+            
+            String sql="";
+            if(tipo==1){         
+            sql= "SELECT id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.departamento, a.area,p.puesto, status FROM empleado e \n" +
+        "INNER JOIN departamentos d\n" +
+        "ON d.id_departamento = e.id_depart\n" +
+        "INNER JOIN areas a\n" +
+        "ON a.id_area = e.id_area\n" +
+        "INNER JOIN puestos p\n" +
+        "ON p.id_puesto = e.id_puesto\n" +
+        "where "+parametro+" LIKE '"+palabra+"%'";}
+            if(tipo==2){         
+            sql= "SELECT id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.departamento, a.area,p.puesto, status FROM empleado e \n" +
+        "INNER JOIN departamentos d\n" +
+        "ON d.id_departamento = e.id_depart\n" +
+        "INNER JOIN areas a\n" +
+        "ON a.id_area = e.id_area\n" +
+        "INNER JOIN puestos p\n" +
+        "ON p.id_puesto = e.id_puesto\n" +
+        "where "+parametro+" LIKE '"+palabra+"%' AND e.status='A'";}
+          if(tipo==3){         
+            sql= "SELECT id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.departamento, a.area,p.puesto, status FROM empleado e \n" +
+        "INNER JOIN departamentos d\n" +
+        "ON d.id_departamento = e.id_depart\n" +
+        "INNER JOIN areas a\n" +
+        "ON a.id_area = e.id_area\n" +
+        "INNER JOIN puestos p\n" +
+        "ON p.id_puesto = e.id_puesto\n" +
+        "where "+parametro+" LIKE '"+palabra+"%' AND e.status='I'";}
+            
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+
+             while (rs.next()) {
+                Object[] datos = new Object[10];
+                for (int i = 0; i < 7; i++) {
+                    datos[i] = rs.getString(i + 1);
+                     }
+                  java.sql.Blob blob = rs.getBlob (2);
+                     byte[] imageByte = blob.getBytes(1, (int) blob.length());
+  	                     InputStream is=new ByteArrayInputStream(imageByte);
+  	                    BufferedImage imag=ImageIO.read(is);
+  	                    Image img = imag;
+  	                    img = Toolkit.getDefaultToolkit().createImage(imageByte);
+  	                    img = img.getScaledInstance(100,50,Image.SCALE_SMOOTH);
+  	                	//ImageIcon icon =new ImageIcon(img);
+  	            datos[1]=new JLabel(new ImageIcon(img));
+                    datos[6]=(datos[6].equals("A"))?"Activo":"Inactivo";
+                modelo.addRow(datos);
+            }
+            cmd.close();
+        }catch (Exception ex){System.out.println("Error" + ex.getMessage());}
+    }
    public int ultimoidEmpleado() {
     int id=0;
         try {
