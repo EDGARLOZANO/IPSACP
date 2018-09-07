@@ -96,8 +96,7 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
 "INNER JOIN areas a\n" +
 "ON a.id_area = e.id_area\n" +
 "INNER JOIN puestos p\n" +
-"ON p.id_puesto = e.id_puesto\n" +
-"WHERE d.id_departamento= 1";
+"ON p.id_puesto = e.id_puesto\n where e.status='A'";
             CallableStatement cmd = cn.prepareCall(sql);
             ResultSet rs = cmd.executeQuery();
            // System.out.println(sql);
@@ -114,7 +113,7 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
   	                    img = Toolkit.getDefaultToolkit().createImage(imageByte);
   	                    img = img.getScaledInstance(100,50,Image.SCALE_SMOOTH);
   	                	//ImageIcon icon =new ImageIcon(img);
-  	            datos[1]=new JLabel(new ImageIcon(img));
+  	            datos[1]=new ImageIcon(img);
                     datos[6]=(datos[6].equals("A"))?"Activo":"Inactivo";
                 modelo.addRow(datos);
             }
@@ -171,7 +170,7 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
   	                    img = Toolkit.getDefaultToolkit().createImage(imageByte);
   	                    img = img.getScaledInstance(100,50,Image.SCALE_SMOOTH);
   	                	//ImageIcon icon =new ImageIcon(img);
-  	            datos[1]=new JLabel(new ImageIcon(img));
+  	            datos[1]=new ImageIcon(img);
                     datos[6]=(datos[6].equals("A"))?"Activo":"Inactivo";
                 modelo.addRow(datos);
             }

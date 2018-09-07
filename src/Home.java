@@ -1,7 +1,9 @@
 
 import BD.Areas;
 import BD.Departamentos;
+import BD.Documentos;
 import BD.Empleados;
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -21,26 +23,40 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Home extends javax.swing.JFrame {
    
-    DefaultTableModel modelo,modeloEmpleado;
+    DefaultTableModel modelo,modeloEmpleado,modeloDoc;
       Departamentos depart;
       Empleados empleados;
+      Documentos doc;
     /**
      * Creates new form Home
      */
+     
+     
+     
+     
+     
     public Home() {
         initComponents();
         depart= new Departamentos();
         empleados=new Empleados();
-        
+        doc=new Documentos();
           modelo = (DefaultTableModel) tablaDepart.getModel();
-          modeloEmpleado = (DefaultTableModel) tablaEmpleado.getModel();
-          tablaEmpleado.setDefaultRenderer(Object.class,new ImgTabla());
+         
+          tablanew();
+           tablanew2();
+           modeloDoc = (DefaultTableModel) tablaArchivo.getModel();
+           modeloEmpleado = (DefaultTableModel) tablaEmpleado.getModel();
+          
+          
          ImgUS();
           RadioGroup();
         TotalDepart();
         TotalEmpleados();
+         TotalDocumentos();
         TablaDimensiones();
+        TablaDimensiones2();
     }
+    
     private void RadioGroup(){
        radioGroup1.add(radioNom);
         radioGroup1.add(radioID);
@@ -69,6 +85,20 @@ public class Home extends javax.swing.JFrame {
       /*
       tablaProductos.getTableHeader().setFont(new Font("Ubuntu", 1,15));*/
     }
+     private void TablaDimensiones2(){
+    
+      tablaArchivo.setRowHeight(50);
+      tablaArchivo.getColumnModel().getColumn(2).setPreferredWidth(300);
+      /*tablaEmpleado.getTableHeader().setFont(new Font("Ubuntu", 1,15));
+      tablaEmpleado.getColumnModel().getColumn(6).setPreferredWidth(2);
+      tablaEmpleado.getColumnModel().getColumn(0).setPreferredWidth(40);
+      tablaEmpleado.getColumnModel().getColumn(1).setPreferredWidth(10);
+      tablaEmpleado.getColumnModel().getColumn(2).setPreferredWidth(250);
+       tablaEmpleado.getColumnModel().getColumn(4).setPreferredWidth(50);
+      /*
+      tablaProductos.getTableHeader().setFont(new Font("Ubuntu", 1,15));*/
+    }
+    
     private void TotalDepart() {
         limpiar(tablaDepart);
         DefaultTableModel modelo = (DefaultTableModel) tablaDepart.getModel();
@@ -81,12 +111,71 @@ public class Home extends javax.swing.JFrame {
         empleados.ReadEmpleado(modeloEmpleado);
     
     }
+    private void TotalDocumentos(){
+        limpiar(tablaArchivo);
+        
+        doc.ReadDocumentos(modeloDoc);
+    
+    }
       private void limpiar(JTable tabla) {
         while (tabla.getRowCount() > 0) {
             ((DefaultTableModel) tabla.getModel()).removeRow(0);
         }
     }
 
+      private void tablanew(){
+          DefaultTableModel modelo3=new DefaultTableModel(){
+    public Class getColumnClass(int indiceColumna){
+        Object stefany=getValueAt(0, indiceColumna);
+        if(stefany == null){
+            return Object.class;
+        }else{
+        return stefany.getClass();
+        }
+       }
+        };
+         
+        modelo3.addColumn("No. Empleado",new Object[] {});
+        modelo3.addColumn("Imagen",new Object[] {});
+        modelo3.addColumn("Nombre",new Object[] {});
+        modelo3.addColumn("Acta de Nac.",new Object[] {});
+        modelo3.addColumn("Carta Ant. Pen.",new Object[] {});
+        modelo3.addColumn("Comp. Domicilio",new Object[] {});
+        modelo3.addColumn("Certi.  Estudios",new Object[] {});
+        modelo3.addColumn("Contrato",new Object[] {});
+        modelo3.addColumn("Curp",new Object[] {});
+        modelo3.addColumn("CV",new Object[] {});
+        modelo3.addColumn("INE",new Object[] {});
+       
+        this.tablaArchivo.setModel(modelo3);
+      
+      }
+      
+      private void tablanew2(){
+          DefaultTableModel modelo3=new DefaultTableModel(){
+    public Class getColumnClass(int indiceColumna){
+        Object stefany=getValueAt(0, indiceColumna);
+        if(stefany == null){
+            return Object.class;
+        }else{
+        return stefany.getClass();
+        }
+       }
+        };
+         
+        modelo3.addColumn("No. Empleado",new Object[] {});
+        modelo3.addColumn("Imagen",new Object[] {});
+        modelo3.addColumn("Nombre",new Object[] {});
+        modelo3.addColumn("Departamentos",new Object[] {});
+        modelo3.addColumn("Area.",new Object[] {});
+        modelo3.addColumn("Puesto",new Object[] {});
+        modelo3.addColumn("Status",new Object[] {});
+       
+       
+        this.tablaEmpleado.setModel(modelo3);
+      
+      }
+      
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,7 +183,7 @@ public class Home extends javax.swing.JFrame {
 
         radioGroup1 = new javax.swing.ButtonGroup();
         radioGroup2 = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Documentos = new javax.swing.JTabbedPane();
         panelGeneral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleado = new javax.swing.JTable();
@@ -112,7 +201,12 @@ public class Home extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDepart = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        PanelDocumentos = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaArchivo = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         labelUS = new javax.swing.JLabel();
 
@@ -124,27 +218,10 @@ public class Home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No. Empleado", "Foto", "Nombre ", "Departamento", "Area", "Puesto", "Activo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(tablaEmpleado);
-        if (tablaEmpleado.getColumnModel().getColumnCount() > 0) {
-            tablaEmpleado.getColumnModel().getColumn(0).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(1).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(2).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(3).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(4).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(5).setResizable(false);
-            tablaEmpleado.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -252,10 +329,10 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jButton1)))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Empleados", panelGeneral);
+        Documentos.addTab("Empleados", panelGeneral);
 
         tablaDepart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -289,23 +366,78 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Departamentos", jPanel2);
+        Documentos.addTab("Departamentos", jPanel2);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1160, Short.MAX_VALUE)
+        tablaArchivo.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        tablaArchivo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tablaArchivo);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Archivo", jPanel5);
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 124, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PanelDocumentosLayout = new javax.swing.GroupLayout(PanelDocumentos);
+        PanelDocumentos.setLayout(PanelDocumentosLayout);
+        PanelDocumentosLayout.setHorizontalGroup(
+            PanelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1160, Short.MAX_VALUE)
+            .addGroup(PanelDocumentosLayout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        PanelDocumentosLayout.setVerticalGroup(
+            PanelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDocumentosLayout.createSequentialGroup()
+                .addGroup(PanelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelDocumentosLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
+        );
+
+        Documentos.addTab("Documentos", PanelDocumentos);
 
         jPanel3.setBackground(java.awt.Color.gray);
 
@@ -327,7 +459,7 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(Documentos)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -337,15 +469,23 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Documentos, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        new add_empleado().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-       limpiar(tablaEmpleado);
+        limpiar(tablaEmpleado);
         txtBuscar.setText(txtBuscar.getText().toUpperCase());
         String parametro="";
         int tipo=0;
@@ -357,10 +497,6 @@ public class Home extends javax.swing.JFrame {
         if(radioInactivos.isSelected()){ tipo=3;}
         empleados.busqueda(modeloEmpleado,txtBuscar.getText(), parametro,tipo);
     }//GEN-LAST:event_txtBuscarKeyReleased
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-            new add_empleado().setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -429,16 +565,20 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Documentos;
+    private javax.swing.JPanel PanelDocumentos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelUS;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JRadioButton radioActivos;
@@ -449,6 +589,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioInactivos;
     private javax.swing.JRadioButton radioNom;
     private javax.swing.JRadioButton radioTodos;
+    private javax.swing.JTable tablaArchivo;
     private javax.swing.JTable tablaDepart;
     private javax.swing.JTable tablaEmpleado;
     private javax.swing.JTextField txtBuscar;

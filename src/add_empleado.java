@@ -324,6 +324,12 @@ File[] files=null;
 
         jLabel6.setText("Nombre ");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
+
         jLabel7.setText("Apellido Paterno");
 
         jLabel8.setText("Apellido Materno");
@@ -331,6 +337,12 @@ File[] files=null;
         txtApeP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtApePKeyReleased(evt);
+            }
+        });
+
+        txtApeM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApeMKeyReleased(evt);
             }
         });
 
@@ -1011,6 +1023,14 @@ File[] files=null;
     private void txtApePKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApePKeyReleased
            txtApeP.setText(txtApeP.getText().toUpperCase());        // TODO add your handling code here:
     }//GEN-LAST:event_txtApePKeyReleased
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+           txtNombre.setText(txtNombre.getText().toUpperCase());        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtApeMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApeMKeyReleased
+        txtApeM.setText(txtApeM.getText().toUpperCase());        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApeMKeyReleased
 
     /**
      * @param args the command line arguments
