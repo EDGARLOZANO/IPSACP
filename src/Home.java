@@ -151,7 +151,7 @@ public class Home extends javax.swing.JFrame {
       
       }
       
-      private void tablanew2(){
+  private void tablanew2(){
           DefaultTableModel modelo3=new DefaultTableModel(){
     public Class getColumnClass(int indiceColumna){
         Object stefany=getValueAt(0, indiceColumna);

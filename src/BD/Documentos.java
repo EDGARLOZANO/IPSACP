@@ -96,7 +96,63 @@ public class Documentos {
             cmd.close();
          } catch (Exception ex) {JOptionPane.showMessageDialog(null, "Error al leer: " + ex);}
     }
-   
+    public void busqueda(DefaultTableModel modelo, String palabra,String parametro,int tipo) {
+
+        try {
+            
+            String sql="";
+            if(tipo==1){         
+            sql= "SELECT d.id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.acta_nac,d.ante_pena, d.comp_domicilio,d.comp_estudios,d.contrato,d.curp,d.cv,d.ife FROM empleado e INNER JOIN documentacion d ON d.id_empleado=e.id_empleado "+
+              "where "+parametro+" LIKE '"+palabra+"%'";}
+            //Entregado
+            if(tipo==2){         
+            sql= "SELECT d.id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.acta_nac,d.ante_pena, d.comp_domicilio,d.comp_estudios,d.contrato,d.curp,d.cv,d.ife FROM empleado e INNER JOIN documentacion d ON d.id_empleado=e.id_empleado\n" +
+            "WHERE d.acta_nac='Entregado' and d.ante_pena='Entregado' and d.comp_domicilio='Entregado' and\n" +
+            "d.comp_estudios='Entregado' and d.contrato='Entregado' and d.curp='Entregado' and d.cv='Entregado' and d.ife='Entregado'\n" +
+            "and "+parametro+" LIKE '"+palabra+"%'";}
+            //Faltante
+          if(tipo==3){         
+            sql= "SELECT d.id_empleado,imagen,concat_ws(' ',nombre,ape_pat,ape_mat),d.acta_nac,d.ante_pena, d.comp_domicilio,d.comp_estudios,d.contrato,d.curp,d.cv,d.ife FROM empleado e \n" +
+                "INNER JOIN documentacion d ON d.id_empleado=e.id_empleado\n" +
+                "WHERE (d.acta_nac='Faltante' OR d.ante_pena='Faltante' OR d.comp_domicilio='Faltante' OR\n" +
+                "d.comp_estudios='Faltante' OR d.contrato='Faltante' OR d.curp='Faltante' OR d.cv='Faltante' OR d.ife='Faltante')\n" +
+                "AND "+ parametro+" like '"+palabra+"%'"; 
+           
+          }
+            
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+             while (rs.next()) {
+                Object[] datos = new Object[13];
+                for (int i = 0; i < 11; i++) {
+                    datos[i] = rs.getString(i + 1);
+                     if(datos[i].equals("Entregado")){
+                        
+                        datos[i]=new javax.swing.ImageIcon(getClass().getResource("/img/exito.png"));
+                    }
+                    if(datos[i].equals("Faltante")){
+                        
+                        datos[i]=new javax.swing.ImageIcon(getClass().getResource("/img/error.png"));
+                    }
+                     }
+                  java.sql.Blob blob = rs.getBlob (2);
+                     byte[] imageByte = blob.getBytes(1, (int) blob.length());
+  	                     InputStream is=new ByteArrayInputStream(imageByte);
+  	                    BufferedImage imag=ImageIO.read(is);
+  	                    Image img = imag;
+  	                    img = Toolkit.getDefaultToolkit().createImage(imageByte);
+  	                    img = img.getScaledInstance(100,50,Image.SCALE_SMOOTH);
+  	                	//ImageIcon icon =new ImageIcon(img);
+  	           
+                 datos[1]=new ImageIcon(img);
+                    
+                modelo.addRow(datos);
+            }
+
+             
+            cmd.close();
+        }catch (Exception ex){System.out.println("Error" + ex.getMessage());}
+    }
 
     
 }
