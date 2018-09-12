@@ -6,10 +6,12 @@
 package BD;
 
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -105,4 +107,24 @@ public class Departamentos {
         } catch (Exception ex) { ;}
        return 0;
     }
+  public ArrayList<Integer> ReadID() {
+     
+     ArrayList<Integer> a = new ArrayList<Integer>();
+        try {
+            String sql = "SELECT id_departamento FROM departamentos";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            //System.out.println(sql);
+            while (rs.next()) {
+               
+                a.add(rs.getInt(1));
+               
+            }
+            cmd.close();
+            System.out.println(a);
+         return a;
+
+        } catch (Exception ex) {}
+      return null; 
+   }
 }

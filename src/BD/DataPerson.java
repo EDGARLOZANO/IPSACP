@@ -5,9 +5,25 @@
  */
 package BD;
 
+import com.toedter.calendar.JDateChooser;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -47,4 +63,33 @@ public class DataPerson {
         
     }
     
+        public   void ReadEmpleado(JTextField txtdomi,JTextField txtLugarNac,JDateChooser fecha,
+            JTextField txtEdad,JTextField txtCorreo,JTextField txtnss,JTextField txtRFC,
+            JTextField txtCurp,JTextField txtTelefono,JComboBox estado,
+          String idEmpleado) {
+          
+        try {
+            String sql = "SELECT * FROM data_person WHERE id_empleado='"+idEmpleado+"'";
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            //System.out.println(sql);
+             while (rs.next()) {
+                
+                    txtdomi.setText(rs.getString (2));
+                    txtLugarNac.setText(rs.getString (3));
+                    java.util.Date fechaParseada= new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString (4));
+                    fecha.setDate(fechaParseada);
+                    txtEdad.setText(rs.getString (5));
+                    txtCorreo.setText(rs.getString (6));
+                     txtnss.setText(rs.getString (7));
+                    txtRFC.setText(rs.getString (8));
+                     txtCurp.setText(rs.getString (9));
+                    txtTelefono.setText(rs.getString (10));
+                    estado.setSelectedIndex(1);
+                   }
+            cmd.close();
+           
+        } catch (Exception ex) {System.out.println(ex);}
+    
+      }
 }

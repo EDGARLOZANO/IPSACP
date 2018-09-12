@@ -9,6 +9,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -109,5 +110,28 @@ public class Puestos {
         } catch (Exception ex) { ;}
        return 0;
     }       
-       
+   
+  public ArrayList<Integer> ReadID(int iddep, int idarea) {
+     
+     ArrayList<Integer> a = new ArrayList<Integer>();
+        try {
+            String sql = "SELECT p.id_puesto FROM puestos p \n" +
+            "INNER JOIN departamentos d\n" +
+            "ON p.id_departamento= d.id_departamento\n" +
+            " where d.id_departamento="+iddep+" and p.id_area="+idarea;
+            CallableStatement cmd = cn.prepareCall(sql);
+            ResultSet rs = cmd.executeQuery();
+            //System.out.println(sql);
+            while (rs.next()) {
+               
+                a.add(rs.getInt(1));
+               
+            }
+            cmd.close();
+            System.out.println(a);
+         return a;
+
+        } catch (Exception ex) {}
+      return null; 
+   }
 }

@@ -481,7 +481,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        new add_empleado().setVisible(true);        // TODO add your handling code here:
+        //new add_empleado().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased

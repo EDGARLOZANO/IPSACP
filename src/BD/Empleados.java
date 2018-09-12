@@ -18,8 +18,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -59,18 +62,32 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
             JOptionPane.showMessageDialog(null, "Error en metodo Insertar: " + ex);
         }
      }
-  public void ReadEmpleado(JLabel label,String idEmpleado) {
-
+  public  int[] ReadEmpleado(JLabel id,JTextField txtNom,
+         
+          JTextField txtApeP,JTextField txtApeM,
+          JComboBox cont,JCheckBox status,JLabel imagen,
+          String idEmpleado) {
+           int[] ids=new int[3];
         try {
-            String sql = "SELECT id_empleado,imagen FROM empleado WHERE id_empleado='"+idEmpleado+"'";
+            String sql = "SELECT * FROM empleado WHERE id_empleado='"+idEmpleado+"'";
             CallableStatement cmd = cn.prepareCall(sql);
             ResultSet rs = cmd.executeQuery();
-            //System.out.println(sql);
+           
              while (rs.next()) {
                 
-                for (int i = 0; i <1; i++) {
-       
-                    java.sql.Blob blob = rs.getBlob (i+2);
+                    id.setText(rs.getString (1));
+                    txtNom.setText(rs.getString (2));
+                    txtApeP.setText(rs.getString (3));
+                    txtApeM.setText(rs.getString (4));
+                    ids[0]=rs.getInt(5);
+                    ids[1]=rs.getInt(6);
+                    ids[2]=rs.getInt(7);
+                    cont.setSelectedIndex(1);
+                    boolean st=(rs.getString(9).equals("A"))?true:false;
+                    System.out.println(st);
+                    status.setSelected(st);
+                    java.sql.Blob blob = rs.getBlob (10);
+                   
                      byte[] imageByte = blob.getBytes(1, (int) blob.length());
   	                     InputStream is=new ByteArrayInputStream(imageByte);
   	                    BufferedImage imag=ImageIO.read(is);
@@ -78,15 +95,17 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
   	                    img = Toolkit.getDefaultToolkit().createImage(imageByte);
   	                    img = img.getScaledInstance(130,130,Image.SCALE_SMOOTH);
   	                	ImageIcon icon =new ImageIcon(img);
-  	                	label.setIcon(icon) ;
-                     }  
-                
-            }
+  	                	imagen.setIcon(icon) ;
+                  }
             cmd.close();
            
+            return ids;
 
         } catch (Exception ex) {System.out.println(ex);}
-    }
+     return ids;  
+  }
+  
+    
    public void ReadEmpleado(DefaultTableModel modelo) {
 
         try {
@@ -194,4 +213,5 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
          } catch (Exception ex) {}
      return id=0; 
    }
+   
 }

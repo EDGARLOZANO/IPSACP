@@ -1,6 +1,10 @@
 
 import BD.Empleados;
 import java.awt.Font;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,11 +21,13 @@ import javax.swing.table.DefaultTableModel;
 public class VistaEmpleados extends javax.swing.JInternalFrame {
 DefaultTableModel modeloEmpleado;
 Empleados empleados;
+JDesktopPane esc;
     /**
      * Creates new form VistaEmpleados
      */
-    public VistaEmpleados() {
+    public VistaEmpleados(JDesktopPane escritorio) {
         initComponents();
+        esc=escritorio;
         empleados=new Empleados();
         tablanew2();
         modeloEmpleado = (DefaultTableModel) tablaEmpleado.getModel();
@@ -109,6 +115,7 @@ Empleados empleados;
         radioActivos = new javax.swing.JRadioButton();
         radioInactivos = new javax.swing.JRadioButton();
         radioTodos = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -189,6 +196,13 @@ Empleados empleados;
                 .addContainerGap())
         );
 
+        jButton1.setText("Ver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,7 +214,9 @@ Empleados empleados;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -212,10 +228,11 @@ Empleados empleados;
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(22, Short.MAX_VALUE)
+                        .addContainerGap(25, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addGap(37, 37, 37)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -237,21 +254,31 @@ Empleados empleados;
         empleados.busqueda(modeloEmpleado,txtBuscar.getText(), parametro,tipo);
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         esc.removeAll();
+        esc.repaint();
+        AddEmpleado v2=new AddEmpleado("1",1);
+           esc.add(v2);
+        try {
+           v2.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        v2.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton radioActivos;
-    private javax.swing.JRadioButton radioDepart;
     private javax.swing.JRadioButton radioDepart1;
     private javax.swing.ButtonGroup radioGroup1;
     private javax.swing.ButtonGroup radioGroup2;
-    private javax.swing.JRadioButton radioID;
     private javax.swing.JRadioButton radioID1;
     private javax.swing.JRadioButton radioInactivos;
-    private javax.swing.JRadioButton radioNom;
     private javax.swing.JRadioButton radioNom1;
     private javax.swing.JRadioButton radioTodos;
     private javax.swing.JTable tablaEmpleado;

@@ -27,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
     private void inicio(){
     
       
-           VistaEmpleados v1=new VistaEmpleados();
+           VistaEmpleados v1=new VistaEmpleados(escritorio);
            escritorio.add(v1);
         try {
            v1.setMaximum(true);
@@ -51,6 +51,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        menuAñadirEmpleado = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -66,6 +67,14 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("EMPLEADOS");
+
+        menuAñadirEmpleado.setText("Añadir");
+        menuAñadirEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAñadirEmpleadoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuAñadirEmpleado);
 
         jMenuItem1.setText("Ver");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +137,19 @@ public class Principal extends javax.swing.JFrame {
         inicio();        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void menuAñadirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAñadirEmpleadoActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+        AddEmpleado v2=new AddEmpleado(0+"",0);
+           escritorio.add(v2);
+        try {
+           v2.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        v2.show();
+    }//GEN-LAST:event_menuAñadirEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,5 +195,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem menuAñadirEmpleado;
     // End of variables declaration//GEN-END:variables
 }

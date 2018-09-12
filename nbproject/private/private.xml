@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/BD/Empleados.java</file>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/add_empleado.java</file>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/Home.java</file>
+            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/AddEmpleado.java</file>
+            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/MostrarImg.java</file>
+            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/BD/DocImg.java</file>
             <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/Principal.java</file>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/VistaEmpleados.java</file>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/ImgTabla.java</file>
-            <file>file:/home/edgar/NetBeansProjects/ipsaCPE/src/BD/Documentos.java</file>
         </group>
     </open-files>
 </project-private>
