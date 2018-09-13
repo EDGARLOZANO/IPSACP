@@ -214,4 +214,27 @@ public void InsertEmpleado(File foto,String Nombre,String apeP,String apeM,int d
      return id=0; 
    }
    
+   public void UpdateMPS(String nombre,String paterno,String materno,int id_depart,int id_area,
+           int id_puesto,String tipo_cont,String status,File img, String id) {
+        try {
+              FileInputStream is = new FileInputStream(img);
+             PreparedStatement cmd = cn.prepareStatement("UPDATE empleado SET  nombre=?, ape_pat=? ,ape_mat=?,"
+                     + "id_depart=?, id_area=?, id_puesto=?, tipo_cont=?, status=?, imagen=? WHERE id_empleado='"+id+"'");
+            
+            cmd.setString(1,nombre);
+            cmd.setString(2,paterno);
+            cmd.setString(3,materno);
+            cmd.setInt(4,id_depart);
+            cmd.setInt(5,id_area);
+            cmd.setInt(6,id_puesto);
+            cmd.setString(7,tipo_cont);
+            cmd.setString(8,status);
+            cmd.setBlob(9,is);
+            cmd.execute();
+            cmd.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error en metodo Insertar: " + ex);
+        }
+    } 
+   
 }

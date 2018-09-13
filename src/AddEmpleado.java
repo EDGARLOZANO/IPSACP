@@ -448,6 +448,11 @@ int tipo2;
         });
 
         btnActualizarEmpleado.setText("Actualizar");
+        btnActualizarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarEmpleadoActionPerformed(evt);
+            }
+        });
 
         btnEliminarEmpleado.setText("Eliminar");
 
@@ -524,18 +529,16 @@ int tipo2;
                 .addGap(18, 18, 18)
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
                         .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel4))
                         .addGap(41, 41, 41))
-                    .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtApeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelImg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtApeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelImg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEmpleadoLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
@@ -1347,6 +1350,16 @@ int tipo2;
         } 
        }       // TODO add your handling code here:
     }//GEN-LAST:event_labelContratoMouseClicked
+
+    private void btnActualizarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEmpleadoActionPerformed
+        int[] id= new int[3];
+        id[0]=depart.idNombre((String) comboDepart.getSelectedItem());
+        id[1]=areas.idNombre((String) comboArea.getSelectedItem());
+        id[2]=puesto.idNombre((String) comboPuesto.getSelectedItem());
+        String status=(checkStatus.isSelected())?"A":"I";
+        empleado.UpdateMPS(txtNombre.getText(),txtApeP.getText(),txtApeM.getText(), id[0], id[1],id[2],
+                comboContrato.getSelectedItem().toString(),status, fileImg,labelID.getText());
+    }//GEN-LAST:event_btnActualizarEmpleadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
